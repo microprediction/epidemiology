@@ -239,3 +239,27 @@ Caveats: one-day diaries mix persistent and day-to-day variation, so the frozen 
 persistent part; POLYMOD under-records very high contact counts in some countries (professional contacts), which
 lowers CV^2. Next: CoMix panel (repeated surveys of the same people, 2020-21) for the persistence of individual
 activity, i.e. the correlation time and K.
+
+## 2026-09-24: CoMix panel: how long busy phases last (analysis/17_comix.py, 18_comix_lambda.py)
+CoMix UK (Zenodo 13684044), March 2020 to March 2022: 61,307 people, 273,252 survey days; the same person is
+panel + panel_id (95% keep gender, 99.6% stay within two adjacent age bands). Adults 18-69 seen 3+ times: 21,158
+people, 160,869 days. Activity = contacts on the diary day / mean for the same week and age band. Within-person
+covariance of activity at survey lags from 1 week to 1.5 years, fitted as persistent + switching (exponential):
+
+| cap | one-day CV^2 | persistent | switching | correlation time | day-to-day | K switching |
+|---|---|---|---|---|---|---|
+| 20 | 1.82 | 0.54 (30%) | 0.23 (13%) | 36 d | 1.05 (57%) | 8 d |
+| 50 | 3.90 | 1.06 (27%) | 0.51 (13%) | 28 d | 2.34 (60%) | 14 d |
+| 100 | 6.54 | 1.69 (26%) | 0.88 (14%) | 23 d | 3.97 (61%) | 21 d |
+
+The split is stable across caps: about 60% of one-day variation is day-to-day (gone within a week, irrelevant to
+depletion), 27-30% persists for the whole panel, 13% switches with a correlation time of 3-5 weeks.
+Predicted lam (UK age matrix x within-age CV2_eff = persistent + r/(r + 1/tau) * switching, r 0.02-0.2/day):
+cap 20: 3.4-3.7 (turnover 22-24% at R = 2.5); cap 50: 4.6-5.2; cap 100: 5.9-6.8.
+With nothing fitted to epidemics, cap 20 matches US winter county waves (3.5 at IFR 0.7%) and Tkachenko et al.'s New
+York City fit (about 4). lam changes only about 7% across r = 0.02-0.2, which is why the county slope could not be
+seen. The switching part is small (13%) with a month-long correlation time: the extra, transient depletion wears
+off over about a month. The persistent part is 2-3 times larger and does not wear off, which sits uneasily with
+Manaus' 66-76% final attack (disputed blood-donor serology) unless heterogeneity there was smaller or reshuffled.
+Caveats: CoMix is measured during the pandemic (lower, more skewed contact counts); contact counts are an imperfect
+proxy for transmission; children are reported by parents and left out; the cap matters for levels, not shares.
