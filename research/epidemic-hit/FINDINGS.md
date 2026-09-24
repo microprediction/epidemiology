@@ -263,3 +263,13 @@ off over about a month. The persistent part is 2-3 times larger and does not wea
 Manaus' 66-76% final attack (disputed blood-donor serology) unless heterogeneity there was smaller or reshuffled.
 Caveats: CoMix is measured during the pandemic (lower, more skewed contact counts); contact counts are an imperfect
 proxy for transmission; children are reported by parents and left out; the cap matters for levels, not shares.
+
+## 2026-09-24: CoMix follow-up span, and references
+Each CoMix participant reports up to 8-10 times, two weeks apart (Gimma et al. 2022). Adults seen 3+ times: median
+span 123 days, 90% within 267 days; about 4% rejoin after a gap of around seven months (gender still 98%
+consistent). Refitting with lags of at most 200 days: persistent 29/26/25%, switching 13/14/14%, correlation time
+40/35/28 days at caps 20/50/100, within one point of the full fit. The persistent covariance is flat from one month
+to the longest lags. The CoMix team's own cap is 50 contacts a day (Gimma et al. 2022), giving lam 4.6-5.2.
+Reference check (reading/REFERENCE_CHECK.md): immunity factor and its formulas credited to Tkachenko et al. 2021;
+Gomes et al. 2022 fit CV 1.12 (lam about 3.5) to England and Scotland, and used two-day diaries; Tkachenko et al.
+2021 eLife is the closest prior model of changing activity.

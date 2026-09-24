@@ -48,7 +48,7 @@
 
   <main>
     <h1>Age and contact matrices</h1>
-    <p class="subtitle">Measured contact patterns predict the immunity factor without fitting to epidemic outcomes: 1.1-1.7 from age alone, 2.3-3.0 with one-day contact diaries, and 3.4-6.8 from a panel that follows the same people for two years, depending on how very high contact counts are capped.</p>
+    <p class="subtitle">Measured contact patterns predict the immunity factor without fitting to epidemic outcomes: 1.1-1.7 from age alone, 2.3-3.0 with one-day contact diaries, and 3.4-6.8 from repeated surveys of the same people, depending on how very high contact counts are capped.</p>
 
     <h2>Age alone</h2>
     <p>Let $M_{ij}$ be the average number of daily contacts a person of age group $i$ has with people of age group
@@ -114,17 +114,18 @@
 
     <h2 id="comix">How long busy phases last</h2>
     <p>A one-day diary cannot tell a busy person from a busy day.</p>
-    <p>The CoMix panel
-    (<a href="./bibliography.html#CoMixUK">CoMix UK</a>) surveyed the same people repeatedly from March 2020 to March
-    2022. For 21,158 adults seen at least three times, activity is the number of contacts on the diary day divided by
+    <p>The CoMix survey (<a href="./bibliography.html#CoMixUK">CoMix UK</a>) ran in the United Kingdom from March 2020
+    to March 2022, and each participant reported their contacts up to eight or ten times, two weeks apart. The median
+    adult is observed over 123 days and 90% within 267 days; about 4% rejoin after a gap of around seven months.</p>
+    <p>For 21,158 adults seen at least three times, activity is the number of contacts on the diary day divided by
     the mean for the same week and age group. That removes the common effect of lockdowns and seasons on each age
     group, though not effects that differ between people.</p>
     <p>The covariance of a person's activity between surveys separated by $\ell$ days is fitted as</p>
     $$C(\ell) = \sigma_p^2 + \sigma_s^2\,e^{-\ell/\tau} \quad (\ell \ge 7\ \text{days}), \qquad
       C(0) = \sigma_p^2 + \sigma_s^2 + \sigma_n^2 ,$$
     <p>with a persistent part $\sigma_p^2$, a switching part $\sigma_s^2$ with correlation time $\tau$, and
-    day-to-day variation $\sigma_n^2$:</p>
-    <div class="table-wrap"><table class="impl"><thead><tr><th>contacts capped at</th><th>one-day $\mathrm{CV}^2$</th><th>persistent</th><th>switching</th><th>correlation time</th><th>day to day</th></tr></thead><tbody>
+    a residual $\sigma_n^2$ that repeat observations a week or more apart cannot resolve:</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>contacts capped at</th><th>one-day $\mathrm{CV}^2$</th><th>persistent</th><th>switching</th><th>correlation time</th><th>residual</th></tr></thead><tbody>
     <tr><td>20</td><td>1.82</td><td>0.54 (30%)</td><td>0.23 (13%)</td><td>36 days</td><td>1.05 (57%)</td></tr>
     <tr><td>50</td><td>3.90</td><td>1.06 (27%)</td><td>0.51 (13%)</td><td>28 days</td><td>2.34 (60%)</td></tr>
     <tr><td>100</td><td>6.54</td><td>1.69 (26%)</td><td>0.88 (14%)</td><td>23 days</td><td>3.97 (61%)</td></tr>
@@ -145,15 +146,18 @@
     </tbody></table></div>
     <p class="muted">Code: <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/17_comix.py">17_comix.py</a>,
     <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/18_comix_lambda.py">18_comix_lambda.py</a>.</p>
-    <p>The level depends on the cap: 3.4-3.7 at 20, 4.6-5.2 at 50 and 5.9-6.8 at 100. The cap of 20 limits the
-    influence of a few reports of very large groups; that choice is not derived from transmission data.</p>
-    <p>At that cap
-    the prediction is close to the index implied by US county waves of winter 2020-21 at a 0.7% fatality rate (3.5)
-    and to the value of about 4 that Tkachenko et al. fitted to New York City. At $R = 2.5$ it puts the peak at
-    22-24%.</p>
+    <p>The level depends on the cap: 3.4-3.7 at 20, 4.6-5.2 at 50 and 5.9-6.8 at 100. The CoMix team caps at 50 contacts
+    a day, the value they found to track changes in the reproduction number most closely
+    (<a href="./bibliography.html#GimmaEtAl2022">Gimma et al. 2022</a>). How many of a very busy person's contacts can
+    transmit is unresolved.</p>
+    <p>The US county waves of winter 2020-21 imply 2.4-5.3 over fatality rates from 0.5% to 1%, and
+    <a href="./bibliography.html#GomesEtAl2022">Gomes et al. (2022)</a> fit about 3.5 to England and Scotland. At
+    $R = 2.5$, $\lambda = 3.5$ puts the peak near 23% and $\lambda = 5$ near 17%.</p>
     <p>The immunity factor changes by only about 7% across a tenfold range of growth rates. That is why the county
     data could not measure how the turnover varies with growth.</p>
-    <p>In this model the transient part is small and decorrelates over about a month, and the persistent part is two
+    <p>The persistent covariance is flat from one month to the longest lags, so it behaves like a habit over the months
+    each person is observed; restricting the fit to lags of at most 200 days changes each share by at most one point.
+    In this model the transient part is small and decorrelates over about a month, and the persistent part is two
     to three times larger. That describes a mostly lasting reduction in the threshold, which is difficult to
     reconcile with the attack reported for Manaus.</p>
     <p>CoMix was collected during the pandemic, when contacts were fewer and more unequal than usual, and contact
