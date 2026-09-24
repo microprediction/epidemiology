@@ -1,0 +1,69 @@
+<!-- title: The turnover rule · epidemiology | math -->
+  <main>
+    <h1>The turnover rule</h1>
+    <p class="subtitle">An epidemic turns over when the infected share reaches $1 - R^{-1/\lambda}$, where $\lambda$ is the immunity factor. The textbook threshold is the case $\lambda = 1$.</p>
+
+    <h2>The textbook threshold</h2>
+    <p>In a homogeneous population each infected person infects $R$ others at the start. When a fraction $S$ of the
+    population is still susceptible, only that fraction of their contacts can be infected, so the effective
+    reproduction number is</p>
+    $$R_e = R\,S .$$
+    <p>The epidemic stops growing when $R_e = 1$, that is when $S = 1/R$. The infected share at that point is the
+    herd-immunity threshold,</p>
+    $$1 - \frac1R .$$
+
+    <h2>Unequal activity</h2>
+    <p>People differ in how many others they meet. The busiest are infected first, and they are also the ones who
+    would have passed the infection on most. Each infection therefore removes more than its share of future
+    transmission, and $R_e$ falls faster than $S$.</p>
+    <p>The immunity factor $\lambda$ measures how much faster:</p>
+    $$R_e = R\,S^{\lambda} .$$
+    <p>Early on, when few are infected, this is</p>
+    $$R_e \approx R\,\big(1 - \lambda\,(1 - S)\big),$$
+    <p>so each percentage point of infection lowers $R_e$ by $\lambda$ percentage points of $R$. For activity that
+    follows a gamma distribution with squared coefficient of variation $\mathrm{CV}^2$, and that raises both the
+    chance of being infected and the number of people infected, the power law is exact with</p>
+    $$\lambda = 1 + 2\,\mathrm{CV}^2 .$$
+    <p>Setting $R_e = 1$ gives the turnover:</p>
+    <div class="equation-card">
+    $$\text{turnover} = 1 - R^{-1/\lambda} .$$
+    </div>
+    <p>Equivalently, the textbook formula applies with an adjusted reproduction number $R^{1/\lambda}$ in place of
+    $R$.</p>
+
+    <h2>The table</h2>
+    <p>Infected share at the turnover:</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>$R$ from early growth</th><th>textbook, $\lambda = 1$</th><th>$\lambda = 2$</th><th>$\lambda = 2.7$</th><th>$\lambda = 3.5$</th><th>$\lambda = 5$</th></tr></thead><tbody>
+    <tr><td>1.3</td><td>23%</td><td>12%</td><td>9%</td><td>7%</td><td>5%</td></tr>
+    <tr><td>1.5</td><td>33%</td><td>18%</td><td>14%</td><td>11%</td><td>8%</td></tr>
+    <tr><td>2.0</td><td>50%</td><td>29%</td><td>23%</td><td>18%</td><td>13%</td></tr>
+    <tr><td>2.5</td><td>60%</td><td>37%</td><td>29%</td><td>23%</td><td>17%</td></tr>
+    <tr><td>3.0</td><td>67%</td><td>42%</td><td>33%</td><td>27%</td><td>20%</td></tr>
+    </tbody></table></div>
+    <p>Doubling in under a week ($R \approx 2.5$) with a turnover near 20-23% corresponds to $\lambda \approx 3.5$,
+    and the adjusted reproduction number is then $2.5^{1/3.5} = 1.3$.</p>
+    <p>The column $\lambda = 2.7$ is the value that contact surveys give for the United States, Sweden and Spain with
+    nothing fitted (<a href="./age.html#activity">age and activity</a>).</p>
+
+    <h2>Against the US county waves</h2>
+    <p>In winter 2020-21, 326 US county waves, grouped by their growth rate, turned over having infected these
+    shares of the people still susceptible when the wave began (fatality rate 0.7%; <a href="./counties.html">details</a>):</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>$R$ at the start of the wave</th><th>textbook</th><th>$\lambda = 2$</th><th>$\lambda = 3.5$</th><th>observed</th></tr></thead><tbody>
+    <tr><td>1.08</td><td>7.8%</td><td>4.0%</td><td>2.3%</td><td>6.5%</td></tr>
+    <tr><td>1.16</td><td>13.8%</td><td>7.2%</td><td>4.2%</td><td>7.0%</td></tr>
+    <tr><td>1.23</td><td>18.9%</td><td>10.0%</td><td>5.8%</td><td>6.9%</td></tr>
+    <tr><td>1.34</td><td>25.5%</td><td>13.7%</td><td>8.1%</td><td>8.8%</td></tr>
+    </tbody></table></div>
+    <p>The level sits between $\lambda = 2$ and $\lambda = 3.5$, well below the textbook. The observed share varies
+    less with $R$ than the rule does, but the county growth rates are too noisy to measure that slope; see
+    <a href="./counties.html">US county waves</a>.</p>
+
+    <h2>Where the rule stops</h2>
+    <p>The immunity factor is read from deaths divided by an infection fatality rate, so it scales with the rate
+    assumed. Across 0.5% to 1%, the county estimate runs from about 2.4 to 5.3.</p>
+    <p>If activity changes over time, the rule gives where the first wave turns, not lasting immunity. As busy and
+    quiet people trade places the immunity factor relaxes toward 1, and the epidemic can resume
+    (<a href="./switching.html">activity that changes over time</a>). Manaus reached 66-76% infected after turning
+    early.</p>
+    <p>Where contacts were cut by lockdowns or by voluntary distancing, the turnover mostly reflects the cut.</p>
+  </main>

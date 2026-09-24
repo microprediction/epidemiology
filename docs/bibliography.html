@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bibliography · epidemiology</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="./index.html">epidemiology</a>
+    <nav>
+      <span class="menu"><span class="menu-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Guide</span><span class="drop">
+        <a href="./rule.html">The turnover rule</a>
+        <a href="./convexity.html">Mixtures and convexity</a>
+        <a href="./switching.html">Activity that changes over time</a>
+        <a href="./age.html">Age and contact matrices</a>
+      </span></span>
+      <span class="menu"><span class="menu-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Data</span><span class="drop">
+        <a href="./counties.html">US county waves</a>
+        <a href="./countries.html">Serology by country</a>
+      </span></span>
+      <a href="./papers.html">Papers</a>
+      <a href="./bibliography.html">Bibliography</a>
+      <a href="https://github.com/microprediction/epidemiology">GitHub</a>
+    </nav>
+  </div>
+  <script>
+    document.querySelectorAll('.site-header .menu-label').forEach(function (b) {
+      b.addEventListener('click', function (e) { e.stopPropagation(); var m = b.parentNode, open = m.classList.toggle('open'); b.setAttribute('aria-expanded', open); });
+    });
+    document.addEventListener('click', function () { document.querySelectorAll('.site-header .menu.open').forEach(function (m) { m.classList.remove('open'); m.querySelector('.menu-label').setAttribute('aria-expanded', 'false'); }); });
+  </script>
+</header>
+
+  <main>
+    <h1>Bibliography</h1>
+    <p class="subtitle">The works the analysis builds on and tests against, grouped by the role they play.</p>
+    <div class="bib">
+      <h3>The threshold and the reproduction number</h3>
+      <ul>
+        <li id="KermackMcKendrick1927">Kermack, W. O. and McKendrick, A. G. (1927). <em>A contribution to the mathematical theory of epidemics</em>. Proceedings of the Royal Society of London A 115(772):700-721. <a href="https://doi.org/10.1098/rspa.1927.0118">doi:10.1098/rspa.1927.0118</a>.<br><span class="muted">The compartmental model and its threshold; the homogeneous benchmark every result here is measured against.</span></li>
+        <li id="DiekmannEtAl1990">Diekmann, O., Heesterbeek, J. A. P. and Metz, J. A. J. (1990). <em>On the definition and the computation of the basic reproduction ratio R0 in models for infectious diseases in heterogeneous populations</em>. Journal of Mathematical Biology 28(4):365-382. <a href="https://doi.org/10.1007/BF00178324">doi:10.1007/BF00178324</a>.<br><span class="muted">R0 as the leading eigenvalue of the next-generation operator; the immunity factor is the rate at which that eigenvalue falls as susceptibles are depleted.</span></li>
+        <li id="WallingaLipsitch2007">Wallinga, J. and Lipsitch, M. (2007). <em>How generation intervals shape the relationship between growth rates and reproductive numbers</em>. Proceedings of the Royal Society B 274(1609):599-604. <a href="https://doi.org/10.1098/rspb.2006.3754">doi:10.1098/rspb.2006.3754</a>.<br><span class="muted">The conversion from growth rate to R used throughout, with a gamma generation interval.</span></li>
+      </ul>
+      <h3>Heterogeneity and the herd-immunity threshold</h3>
+      <ul>
+        <li id="BrittonEtAl2020">Britton, T., Ball, F. and Trapman, P. (2020). <em>A mathematical model reveals the influence of population heterogeneity on herd immunity to SARS-CoV-2</em>. Science 369(6505):846-849. <a href="https://doi.org/10.1126/science.abc6810">doi:10.1126/science.abc6810</a>.<br><span class="muted">Age and activity groups lower the disease-induced herd immunity level well below 1 - 1/R0; persistent heterogeneity.</span></li>
+        <li id="TkachenkoEtAl2021">Tkachenko, A. V., Maslov, S., Elbanna, A., Wong, G. N., Weiner, Z. J. and Goldenfeld, N. (2021). <em>Time-dependent heterogeneity leads to transient suppression of the COVID-19 epidemic, not herd immunity</em>. Proceedings of the National Academy of Sciences 118(17):e2015972118. <a href="https://doi.org/10.1073/pnas.2015972118">doi:10.1073/pnas.2015972118</a>.<br><span class="muted">Introduces the immunity factor and its time dependence; fits about 4 to New York City and Chicago. The closed forms on the time-varying activity page are a solvable case of their integral.</span></li>
+        <li id="GomesEtAl2022">Gomes, M. G. M., Ferreira, M. U., Corder, R. M., King, J. G. et al. (2022). <em>Individual variation in susceptibility or exposure to SARS-CoV-2 lowers the herd immunity threshold</em>. Journal of Theoretical Biology 540:111063. <a href="https://doi.org/10.1016/j.jtbi.2022.111063">doi:10.1016/j.jtbi.2022.111063</a>.<br><span class="muted">The gamma power law with exponent 1 + CV^2 for susceptibility and 1 + 2 CV^2 for exposure, fitted to European first waves.</span></li>
+        <li id="LewontinCohen1969">Lewontin, R. C. and Cohen, D. (1969). <em>On population growth in a randomly varying environment</em>. Proceedings of the National Academy of Sciences 62(4):1056-1060. <a href="https://doi.org/10.1073/pnas.62.4.1056">doi:10.1073/pnas.62.4.1056</a>.<br><span class="muted">The mean of a randomly growing population can grow while almost every realization declines: the distinction between the mean and typical growth that the growth convexity rests on.</span></li>
+      </ul>
+      <h3>Contacts</h3>
+      <ul>
+        <li id="MossongEtAl2008">Mossong, J., Hens, N., Jit, M. et al. (2008). <em>Social contacts and mixing patterns relevant to the spread of infectious diseases</em>. PLoS Medicine 5(3):e74. <a href="https://doi.org/10.1371/journal.pmed.0050074">doi:10.1371/journal.pmed.0050074</a>.<br><span class="muted">POLYMOD: one-day contact diaries of 7,290 people in eight countries; the source of the within-age activity variance.</span></li>
+        <li id="PremEtAl2021">Prem, K., van Zandvoort, K., Klepac, P. et al. (2021). <em>Projecting contact matrices in 177 geographical regions: an update and comparison with empirical data for the COVID-19 era</em>. PLOS Computational Biology 17(7):e1009098. <a href="https://doi.org/10.1371/journal.pcbi.1009098">doi:10.1371/journal.pcbi.1009098</a>.<br><span class="muted">Age contact matrices by country; the age part of the immunity factor.</span></li>
+        <li id="DaviesEtAl2020">Davies, N. G., Klepac, P., Liu, Y. et al. (2020). <em>Age-dependent effects in the transmission and control of COVID-19 epidemics</em>. Nature Medicine 26(8):1205-1211. <a href="https://doi.org/10.1038/s41591-020-0962-9">doi:10.1038/s41591-020-0962-9</a>.<br><span class="muted">Lower susceptibility under 20; the sensitivity case on the age page.</span></li>
+      </ul>
+      <h3>Serology</h3>
+      <ul>
+        <li id="PollanEtAl2020">Poll&aacute;n, M., P&eacute;rez-G&oacute;mez, B., Pastor-Barriuso, R. et al. (2020). <em>Prevalence of SARS-CoV-2 in Spain (ENE-COVID): a nationwide, population-based seroepidemiological study</em>. The Lancet 396(10250):535-544. <a href="https://doi.org/10.1016/S0140-6736(20)31483-5">doi:10.1016/S0140-6736(20)31483-5</a>.<br><span class="muted">Provincial seroprevalence; the provincial tables of rounds 3 and 4 come from the Ministry of Health reports.</span></li>
+        <li id="StringhiniEtAl2020">Stringhini, S., Wisniak, A., Piumatti, G. et al. (2020). <em>Seroprevalence of anti-SARS-CoV-2 IgG antibodies in Geneva, Switzerland (SEROCoV-POP)</em>. The Lancet 396(10247):313-319. <a href="https://doi.org/10.1016/S0140-6736(20)31304-0">doi:10.1016/S0140-6736(20)31304-0</a>.<br><span class="muted">Weekly population serology in Geneva, April-May 2020.</span></li>
+        <li id="WardEtAl2021">Ward, H., Atchison, C., Whitaker, M. et al. (2021). <em>SARS-CoV-2 antibody prevalence in England following the first peak of the pandemic</em>. Nature Communications 12:905. <a href="https://doi.org/10.1038/s41467-021-21237-w">doi:10.1038/s41467-021-21237-w</a>.<br><span class="muted">REACT-2 round 1 by region, June-July 2020.</span></li>
+        <li id="CastroDopicoEtAl2021">Castro Dopico, X., Muschiol, S., Christian, M. et al. (2021). <em>Seropositivity in blood donors and pregnant women during the first year of SARS-CoV-2 transmission in Stockholm, Sweden</em>. Journal of Internal Medicine 290(3):666-676. <a href="https://doi.org/10.1111/joim.13304">doi:10.1111/joim.13304</a>.<br><span class="muted">Weekly Stockholm serology through the first year.</span></li>
+        <li id="BussEtAl2021">Buss, L. F., Prete, C. A., Abrahim, C. M. M. et al. (2021). <em>Three-quarters attack rate of SARS-CoV-2 in the Brazilian Amazon during a largely unmitigated epidemic</em>. Science 371(6526):288-292. <a href="https://doi.org/10.1126/science.abe9728">doi:10.1126/science.abe9728</a>.<br><span class="muted">Monthly blood-donor serology in Manaus, corrected for waning; the case where control was weak.</span></li>
+      </ul>
+      <h3>Data</h3>
+      <ul>
+        <li>The New York Times, <a href="https://github.com/nytimes/covid-19-data">COVID-19 data</a>: US county cases and deaths, 2020-21.</li>
+        <li>Instituto de Salud Carlos III, <a href="https://cnecovid.isciii.es/">CNE</a>: Spanish daily admissions and deaths by province.</li>
+        <li>Folkh&auml;lsomyndigheten, Socialstyrelsen and Svenska Intensivv&aring;rdsregistret: Swedish deaths, intensive-care admissions and serology reports.</li>
+        <li>UK Health Security Agency coronavirus dashboard archive and ONS: English deaths and admissions by region.</li>
+        <li>Swiss Federal Office of Public Health: Geneva deaths and admissions.</li>
+        <li>Brazil's mortality information system (SIM): all-cause deaths in Manaus, 2015-2020.</li>
+        <li>World Bank population by age, 2020; US Census county population estimates, 2019.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <a href="https://github.com/microprediction/epidemiology">Source</a> &middot;
+    Maintained by <a href="https://github.com/microprediction">Peter Cotton</a>.
+  </footer>
+</body>
+</html>

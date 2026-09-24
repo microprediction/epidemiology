@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Activity that changes over time · epidemiology</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" crossorigin="anonymous">
+  <style>.katex { white-space: nowrap; } .katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }</style>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="./index.html">epidemiology</a>
+    <nav>
+      <span class="menu"><span class="menu-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Guide</span><span class="drop">
+        <a href="./rule.html">The turnover rule</a>
+        <a href="./convexity.html">Mixtures and convexity</a>
+        <a href="./switching.html">Activity that changes over time</a>
+        <a href="./age.html">Age and contact matrices</a>
+      </span></span>
+      <span class="menu"><span class="menu-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Data</span><span class="drop">
+        <a href="./counties.html">US county waves</a>
+        <a href="./countries.html">Serology by country</a>
+      </span></span>
+      <a href="./papers.html">Papers</a>
+      <a href="./bibliography.html">Bibliography</a>
+      <a href="https://github.com/microprediction/epidemiology">GitHub</a>
+    </nav>
+  </div>
+  <script>
+    document.querySelectorAll('.site-header .menu-label').forEach(function (b) {
+      b.addEventListener('click', function (e) { e.stopPropagation(); var m = b.parentNode, open = m.classList.toggle('open'); b.setAttribute('aria-expanded', open); });
+    });
+    document.addEventListener('click', function () { document.querySelectorAll('.site-header .menu.open').forEach(function (m) { m.classList.remove('open'); m.querySelector('.menu-label').setAttribute('aria-expanded', 'false'); }); });
+  </script>
+</header>
+
+  <main>
+    <h1>Activity that changes over time</h1>
+    <p class="subtitle">People move between busy and quiet phases. The growth rate, the reproduction number and the immunity factor then have closed forms, and the excess immunity factor in the growth phase is the growth rate times the Green&ndash;Kubo number of activity.</p>
+
+    <h2>The model</h2>
+    <p>Each person's activity $a$ is high or low, $a \in \{a_1, a_2\}$, with long-run shares $p_1, p_2$. Activity is
+    scaled to mean 1, and its variance is $\sigma^2$. A two-point law satisfies</p>
+    $$(a - 1)^2 = c\,(a - 1) + \sigma^2$$
+    <p>for a constant $c$ that sets the skew.</p>
+    <p>Activity switches on a Markov clock and forgets its state at rate $\kappa$, so its correlation time is
+    $1/\kappa$. It raises both the chance of being infected and the number infected.</p>
+    <p>A person with activity $a$ is
+    infected at rate $\beta\,a\,\Phi$, where $\Phi = \sum_k a_k I_k$ is the activity-weighted number infectious.
+    Infectious people recover at rate $\gamma$, and everyone keeps switching.</p>
+
+    <h2>Early growth</h2>
+    <p>Look for infections growing like $e^{rt}$ with profile $v$ over the two activity levels. With $Q$ the switching
+    generator,</p>
+    $$v = \beta\,\Phi\,(r + \gamma - Q^\top)^{-1}(a \circ p) .$$
+    <p>The stationary law $p$ is fixed by $Q^\top$, and the deviation $(a - 1)\circ p$ decays at rate $\kappa$. The
+    resolvent therefore acts on just these two directions:</p>
+    $$(r + \gamma - Q^\top)^{-1}(a \circ p) = \frac{p}{r + \gamma} + \frac{(a - 1)\circ p}{r + \gamma + \kappa} .$$
+    <p>Taking the activity-weighted total gives the growth equation:</p>
+    <div class="equation-card">
+    $$1 = \beta\Big(\frac{1}{r + \gamma} + \frac{\sigma^2}{r + \gamma + \kappa}\Big), \qquad
+      R_0 = \beta\Big(\frac1\gamma + \frac{\sigma^2}{\gamma + \kappa}\Big) .$$
+    </div>
+    <p>Busy people infect busy people. The second term is that correlation, kept for as long as a busy phase
+    outlasts the infection.</p>
+
+    <h2>The immunity factor</h2>
+    <p>While the epidemic grows, susceptibles are removed along the same profile, and the depletion splits on the
+    same two directions. Write $\rho = r/(r + \kappa)$ for the share of the busy phase that survives one growth time.
+    Linearizing the effective reproduction number in the infected share gives</p>
+    <div class="equation-card">
+    $$\lambda = \frac{\dfrac{1 + \sigma^2\rho}{\gamma} + \dfrac{\sigma^2\big(1 + (1 + c)\rho\big)}{\gamma + \kappa}}
+      {\dfrac1\gamma + \dfrac{\sigma^2}{\gamma + \kappa}}, \qquad \rho = \frac{r}{r + \kappa} .$$
+    </div>
+    <p>When activity never changes ($\kappa = 0$) this is $\langle a^3\rangle / \langle a^2\rangle$, the value for
+    persistent heterogeneity. When it changes very fast ($\kappa \to \infty$) it is 1, the homogeneous value.</p>
+    <p>For fast switching, to first order,</p>
+    $$\lambda - 1 \approx r\,K_a, \qquad K_a = \frac{\sigma^2}{\kappa},$$
+    <p>where $K_a$ is the Green&ndash;Kubo number of activity, its variance times its correlation time. A fast
+    epidemic outruns the reshuffling of activity and depletes the busy phase before it is refilled.</p>
+    <p class="muted">Both formulas agree with the numerical solution of the model: the growth rate to four digits and
+    $\lambda$ to 0.1-0.3%. Code: <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/04_activity_switching.py">04_activity_switching.py</a>.</p>
+
+    <h2>New York City</h2>
+    <p>Calibrate $\beta$ to New York City's early growth, with deaths doubling in about three days
+    ($r = \ln 2/3$ per day), and $\gamma = 0.2$. A homogeneous reading gives $R = 2.16$ and a threshold of 54%. With
+    activity switching and no mitigation at all, the first peak of infections comes at</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>activity variance $\sigma^2$</th><th>correlation time $1/\kappa$</th><th>$\lambda$ in the growth phase</th><th>infected at the first peak</th><th>long-run threshold $1 - 1/R_0$</th></tr></thead><tbody>
+    <tr><td>0.5</td><td>10 days</td><td>1.6</td><td>40%</td><td>51%</td></tr>
+    <tr><td>1</td><td>10 days</td><td>2.3</td><td>31%</td><td>50%</td></tr>
+    <tr><td>1</td><td>100 days</td><td>2.9</td><td>25%</td><td>53%</td></tr>
+    <tr><td>2</td><td>10 days</td><td>3.6</td><td>22%</td><td>48%</td></tr>
+    <tr><td>2</td><td>33 days</td><td>4.5</td><td>17%</td><td>51%</td></tr>
+    <tr><td>4</td><td>10 days</td><td>6.3</td><td>13%</td><td>46%</td></tr>
+    </tbody></table></div>
+    <p class="muted">Gamma-like skew, $c = 2\sigma^2$. Code: <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/05_nyc_scenarios.py">05_nyc_scenarios.py</a>.</p>
+    <p>New York City's serology after the first wave was 23%. The row with variance 2 and a 10-day correlation time
+    turns at 22%, with $\lambda = 3.6$. <a href="./bibliography.html#TkachenkoEtAl2021">Tkachenko et al. (2021)</a>
+    fitted $\lambda \approx 4$ to New York City and Chicago with a numerical model of time-varying activity.</p>
+    <p>New York City also locked down on 22 March 2020, so its turnover cannot be credited to activity alone.</p>
+
+    <h2>After the first wave</h2>
+    <p>The long-run threshold stays near 50% in every row. As busy and quiet people trade places, the immunity factor
+    relaxes toward 1. The first turnover is then temporary: in Manaus, where control was weak, infection went on to
+    66-76% after turning early (<a href="./countries.html">Serology by country</a>).</p>
+    <p>Fixed heterogeneity makes the opposite prediction. The busiest stay immune, and later waves need new
+    susceptibles.</p>
+  </main>
+
+  <footer>
+    <a href="https://github.com/microprediction/epidemiology">Source</a> &middot;
+    Maintained by <a href="https://github.com/microprediction">Peter Cotton</a>.
+  </footer>
+</body>
+</html>
+<script>setTimeout(function(){var n=0;document.querySelectorAll('.katex-display,p,li,.equation-card').forEach(function(e){if(e.scrollWidth>e.clientWidth+1){n++;}});document.body.setAttribute('data-overflow',n);},3000);</script>

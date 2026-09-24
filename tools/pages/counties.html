@@ -1,0 +1,59 @@
+<!-- title: US county waves · epidemiology | math -->
+  <main>
+    <h1>US county waves</h1>
+    <p class="subtitle">471 county epidemic waves from 2020 to mid-2021: nearly all turned over far below the textbook threshold, with an immunity factor of 2 to 3.5 in winter 2020-21.</p>
+
+    <h2>The data</h2>
+    <p>Daily COVID-19 deaths by county from the New York Times, February 2020 to June 2021, with New York City as one
+    unit, and Census 2019 populations. Deaths are used rather than cases because testing changed so much over the
+    period. Only counties with more than 50,000 people are kept.</p>
+    <p>A wave is a peak in the three-week average of weekly deaths that rises at least 30% of the county maximum above
+    its surroundings and reaches 10 deaths a week.</p>
+
+    <h2>What is measured</h2>
+    <p>For each wave:</p>
+    <ul>
+      <li>the early growth rate $r$, from the contiguous rise between about 10% and 60% of the peak, converted to a
+        reproduction number with a gamma generation interval of mean 5.5 days and standard deviation 2.1 days,
+        $$R = (1 + r\,\theta)^k, \qquad k = (5.5/2.1)^2, \quad \theta = 2.1^2/5.5;$$</li>
+      <li>the infected share when the wave began and when it turned over, from cumulative deaths divided by an
+        infection fatality rate times the population. Deaths follow infections by about three weeks, so the death
+        peak marks the infection peak.</li>
+    </ul>
+    <p>A wave that starts with a susceptible share $S_0$ and effective reproduction number $R$ should, in a
+    homogeneous population, turn over at $S_0/R$. The immunity factor of the wave is</p>
+    $$\lambda = \frac{\ln R}{-\ln\big(S_{\text{turn}}/S_0\big)} .$$
+
+    <h2>The level</h2>
+    <p>At a fatality rate of 0.7%, 95-100% of waves in every season turned over below the homogeneous threshold.</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>season</th><th>waves</th><th>median $R$</th><th>median homogeneous threshold</th><th>median infected at the turnover</th></tr></thead><tbody>
+    <tr><td>spring 2020</td><td>61</td><td>1.51</td><td>34%</td><td>4%</td></tr>
+    <tr><td>summer 2020</td><td>69</td><td>1.37</td><td>29%</td><td>6%</td></tr>
+    <tr><td>winter 2020-21</td><td>341</td><td>1.29</td><td>30%</td><td>16% (cumulative)</td></tr>
+    </tbody></table></div>
+    <p>Spring and summer 2020 carry the lockdowns and closures. In winter, the constant immunity factor that fits the
+    waves is about 3.5 at a 0.7% fatality rate, 2.4 at 0.5% and 5.3 at 1%, or about 2.1 at 0.7% when growth is read
+    from cases instead of deaths.</p>
+
+    <h2>The slope cannot be measured</h2>
+    <p>Grouped by their growth, the winter waves infected nearly the same share of their susceptibles whatever their
+    $R$ (<a href="./rule.html">the turnover rule</a>). A flat relation is what time-varying activity predicts, since
+    faster waves outrun the refilling of busy phases.</p>
+    <p>But growth read from deaths and growth read from cases, three weeks earlier, barely agree: their correlation
+    is 0.23 in winter and 0.57 in spring. Random error in a growth estimate flattens any fitted slope.</p>
+    <p>Using case growth as an instrument for death growth, the slope of log depletion on $\log\ln R$ is 0.91 in
+    spring (90% interval 0.46 to 1.50). In winter the estimate is 2.9 with an interval from 0.7 to 12.5, because the
+    instrument is weak. Grouping by case growth instead gives a flat relation again.</p>
+    <p>With these growth measures the slope is not identified, and the county data cannot separate fixed from
+    time-varying heterogeneity. The level is robust: waves turn over far below the homogeneous threshold.</p>
+
+    <h2>Many places, each switching</h2>
+    <p>County transmission does vary strongly and non-persistently. The spread of weekly log growth across counties
+    has standard deviation 0.25 to 0.47, and a county's excess growth does not carry over to the next week.</p>
+    <p>The cross-county variance of log incidence grows by 0.051 a week, a Green&ndash;Kubo number of 0.026 per week. That is
+    too small to matter for the paradox at county scale: it moves $R$ by about 0.02.</p>
+    <p class="muted">Code: <a href="https://github.com/microprediction/epidemiology/tree/main/research/epidemic-hit/analysis">analysis</a>
+    scripts 02, 03 and 06-09. Data: <a href="https://github.com/nytimes/covid-19-data">nytimes/covid-19-data</a>,
+    <a href="https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/">Census population
+    estimates</a>.</p>
+  </main>

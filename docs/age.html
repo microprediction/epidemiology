@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Age and contact matrices · epidemiology</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" crossorigin="anonymous">
+  <style>.katex { white-space: nowrap; } .katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }</style>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="./index.html">epidemiology</a>
+    <nav>
+      <span class="menu"><span class="menu-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Guide</span><span class="drop">
+        <a href="./rule.html">The turnover rule</a>
+        <a href="./convexity.html">Mixtures and convexity</a>
+        <a href="./switching.html">Activity that changes over time</a>
+        <a href="./age.html">Age and contact matrices</a>
+      </span></span>
+      <span class="menu"><span class="menu-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Data</span><span class="drop">
+        <a href="./counties.html">US county waves</a>
+        <a href="./countries.html">Serology by country</a>
+      </span></span>
+      <a href="./papers.html">Papers</a>
+      <a href="./bibliography.html">Bibliography</a>
+      <a href="https://github.com/microprediction/epidemiology">GitHub</a>
+    </nav>
+  </div>
+  <script>
+    document.querySelectorAll('.site-header .menu-label').forEach(function (b) {
+      b.addEventListener('click', function (e) { e.stopPropagation(); var m = b.parentNode, open = m.classList.toggle('open'); b.setAttribute('aria-expanded', open); });
+    });
+    document.addEventListener('click', function () { document.querySelectorAll('.site-header .menu.open').forEach(function (m) { m.classList.remove('open'); m.querySelector('.menu-label').setAttribute('aria-expanded', 'false'); }); });
+  </script>
+</header>
+
+  <main>
+    <h1>Age and contact matrices</h1>
+    <p class="subtitle">Measured contact patterns give the immunity factor with nothing fitted: 1.1-1.7 from age alone, and 2.3-3.0 once the spread of activity within each age group is included.</p>
+
+    <h2>Age alone</h2>
+    <p>Let $M_{ij}$ be the average number of daily contacts a person of age group $i$ has with people of age group
+    $j$, from the synthetic matrices of <a href="./bibliography.html#PremEtAl2021">Prem et al. (2021)</a>. The
+    infected fraction $x_i$ of age group $i$ grows as</p>
+    $$\dot x_i = \beta\,s_i\,\sigma_i\sum_j M_{ij}\,x_j - \gamma\,x_i,$$
+    <p>where $s_i$ is the susceptible share and $\sigma_i$ a relative susceptibility.</p>
+    <p>Early infections take the age profile $v$, the leading right eigenvector of $\operatorname{diag}(\sigma)M$.
+    Let $u$ be its left eigenvector and $n_i$ the population shares. Depleting the susceptibles along $v$ lowers the
+    leading eigenvalue at the rate</p>
+    <div class="equation-card">
+    $$\lambda_{\text{age}} = \frac{\sum_i u_i v_i^2 \,\big/ \sum_i u_i v_i}{\sum_i n_i v_i} .$$
+    </div>
+    <p>The numerator is how strongly early infections sit in the groups that drive transmission. The denominator
+    converts to the overall infected share.</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>country</th><th>$\lambda_{\text{age}}$, equal susceptibility</th><th>under-20s half as susceptible</th><th>infected at the first peak, $R = 2.5$</th></tr></thead><tbody>
+    <tr><td>Spain</td><td>1.51</td><td>1.14</td><td>53% (56%)</td></tr>
+    <tr><td>Sweden</td><td>1.58</td><td>1.18</td><td>52% (55%)</td></tr>
+    <tr><td>United States</td><td>1.53</td><td>1.13</td><td>53% (56%)</td></tr>
+    <tr><td>United Kingdom</td><td>1.72</td><td>1.14</td><td>51% (56%)</td></tr>
+    <tr><td>Switzerland</td><td>1.41</td><td>1.15</td><td>54% (55%)</td></tr>
+    <tr><td>Brazil</td><td>1.27</td><td>1.12</td><td>55% (56%)</td></tr>
+    </tbody></table></div>
+    <p class="muted">Peaks from simulating the age-structured model; the textbook value at $R = 2.5$ is 60%.</p>
+    <p class="muted">The half-susceptibility case follows <a href="./bibliography.html#DaviesEtAl2020">Davies et al. (2020)</a>.
+    Populations: World Bank, 2020. Code:
+    <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/12_age.py">12_age.py</a>.</p>
+    <p>Age mixing moves the threshold from 60% to 51-56%. It cannot account for turnovers near 20%.</p>
+
+    <h2 id="activity">Activity within age groups</h2>
+    <p>The POLYMOD contact diaries (<a href="./bibliography.html#MossongEtAl2008">Mossong et al. 2008</a>) record every
+    contact of 7,290 people in eight European countries on one day. Within an age group the number of contacts
+    varies widely. The squared coefficient of variation is</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>age</th><th>participants</th><th>$\mathrm{CV}^2$, all contacts</th><th>$\mathrm{CV}^2$, close contacts</th></tr></thead><tbody>
+    <tr><td>0-19</td><td>2,719</td><td>0.53</td><td>0.58</td></tr>
+    <tr><td>20-64</td><td>3,950</td><td>0.63</td><td>0.70</td></tr>
+    <tr><td>65+</td><td>556</td><td>0.77</td><td>0.95</td></tr>
+    </tbody></table></div>
+    <p class="muted">Close contacts: physical, or lasting at least 15 minutes. By country, the adult value runs from
+    0.39 (Italy) to 0.68 (Belgium).</p>
+    <p>Give each person a gamma-distributed activity within their age group, with these variances, and let activity
+    scale both their contacts and their partners' contacts. The same eigenvector formula, applied to the joint
+    structure of age and activity, gives</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>country</th><th>$\lambda$, age and activity</th><th>infected at the first peak, $R = 1.6$</th><th>rule $1 - R^{-1/\lambda}$</th><th>final</th><th>textbook</th></tr></thead><tbody>
+    <tr><td>United States</td><td>2.70</td><td>18.5%</td><td>16.0%</td><td>33.0%</td><td>37.5%</td></tr>
+    <tr><td>Sweden</td><td>2.77</td><td>18.1%</td><td>15.6%</td><td>32.4%</td><td>37.5%</td></tr>
+    <tr><td>Spain</td><td>2.66</td><td>18.5%</td><td>16.2%</td><td>33.0%</td><td>37.5%</td></tr>
+    <tr><td>United Kingdom</td><td>3.02</td><td>17.3%</td><td>14.4%</td><td>31.1%</td><td>37.5%</td></tr>
+    <tr><td>Brazil</td><td>2.30</td><td>19.9%</td><td>18.5%</td><td>35.4%</td><td>37.5%</td></tr>
+    </tbody></table></div>
+    <p class="muted">Activity held fixed through the wave. Code:
+    <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/15_polymod.py">15_polymod.py</a>,
+    <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/16_age_activity.py">16_age_activity.py</a>.</p>
+    <p>An immunity factor of 2.3 to 3.0, from contact surveys alone, matches what epidemics show where control was
+    weak: 2 to 3.5 in US county waves in winter 2020-21, and 2.5 in Manaus.</p>
+    <p>A one-day diary mixes lasting differences between people with day-to-day variation, so the fixed-activity
+    value is an upper bound for the lasting part. POLYMOD also under-records very high contact counts in some
+    countries, which pushes the other way.</p>
+    <p>With activity held fixed, the final size in Brazil at $R = 1.6$ would be 35%. Manaus reached 66-76%. The early
+    turnover matches fixed activity, but the final size says activity reshuffled afterwards
+    (<a href="./switching.html">activity that changes over time</a>).</p>
+  </main>
+
+  <footer>
+    <a href="https://github.com/microprediction/epidemiology">Source</a> &middot;
+    Maintained by <a href="https://github.com/microprediction">Peter Cotton</a>.
+  </footer>
+</body>
+</html>

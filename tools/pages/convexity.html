@@ -1,0 +1,76 @@
+<!-- title: Mixtures and convexity · epidemiology | math -->
+  <main>
+    <h1>Mixtures and convexity</h1>
+    <p class="subtitle">A population made of many places, each with its own transmission rate: early growth is dominated by the fastest places, each place turns over on its own, and two convexity adjustments separate the growth from the turnover.</p>
+
+    <p class="lead">This is the argument of <a href="./papers.html">Cotton (2020)</a>, first set out in May 2020. It
+    needs no model of how the places interact.</p>
+
+    <h2>Only symmetric questions matter</h2>
+    <p>Divide a city into neighbourhoods. The questions that matter for policy are symmetric in the neighbourhoods:
+    total infections, the growth of the total, the number still susceptible when infections peak. Relabelling the
+    neighbourhoods does not change them.</p>
+    <p>Any two models related by a relabelling give the same answers to these questions, so it is enough to find a
+    model in the same class as the true one. Each class contains exactly one exchangeable model.</p>
+    <p>By de Finetti's
+    theorem, exchangeable models are mixtures of models in which the neighbourhoods are independent and identically
+    distributed. That licenses the simplest model that can fit: independent neighbourhoods, each a standard SIR
+    epidemic with its own transmission rate.</p>
+
+    <h2>The model</h2>
+    <p>Neighbourhood transmission rates are $\beta = \bar\beta\,\eta$, where $\eta$ varies across neighbourhoods with
+    mean 1. Recovery happens at rate $\gamma$. Write $\bar R = \bar\beta/\gamma$ for the reproduction number at the
+    average rate.</p>
+
+    <h2>The growth convexity</h2>
+    <p>Early on nearly everyone is susceptible, and the total number infected grows like</p>
+    $$\frac{i(t)}{i(0)} = e^{-\gamma t}\,\mathbb E\big[e^{t\bar\beta\eta}\big] .$$
+    <p>By Jensen's inequality the average of the exponentials exceeds the exponential of the average. The fastest
+    neighbourhoods dominate the total, and the growth rate read from it corresponds to a transmission rate</p>
+    $$\beta_g = \frac1t\,\log\mathbb E\big[e^{t\bar\beta\eta}\big] = G\,\bar\beta, \qquad G > 1 .$$
+    <p>For normally distributed $\eta$ with variance $\sigma^2$ this is</p>
+    $$\beta_g = \bar\beta\Big(1 + \frac{t\,\bar\beta\,\sigma^2}{2}\Big) .$$
+    <p>A model fitted to early growth therefore reads $R_g = G\,\bar R$, larger than the average reproduction
+    number.</p>
+
+    <h2>The herd convexity</h2>
+    <p>A neighbourhood with rate $\beta$ turns over when its susceptible share falls to $\gamma/\beta$. Averaged
+    over neighbourhoods, the susceptible share at the turnover is</p>
+    $$s^* \approx \mathbb E\Big[\frac{\gamma}{\beta}\Big] = \frac{J}{\bar R}, \qquad J = \mathbb E\Big[\frac1\eta\Big] \ge 1,$$
+    <p>the ratio of the arithmetic mean of the transmission rate to its harmonic mean.</p>
+
+    <h2>Together</h2>
+    <p>Combining the two,</p>
+    <div class="equation-card">
+    $$s^* \approx \frac{J\,G}{R_g} .$$
+    </div>
+    <p>The susceptible share at the turnover exceeds the textbook $1/R_g$ by the product of two convexity
+    adjustments, one from Jensen's inequality on growth and one on the turnover. Peaks in different neighbourhoods
+    also fall at different times, which adds a third factor $F$.</p>
+    <p>For a transmission rate that follows an Ornstein&ndash;Uhlenbeck process, the growth convexity is
+    Vasicek's bond-price formula with the sign of the rate reversed.</p>
+
+    <h2>A switching instance</h2>
+    <p>Let each place's rate switch between $\bar\beta + \delta$ and $\bar\beta - \delta$ at rate $\nu$ in each
+    direction, independently across places. A single place grows at the typical rate $\bar\beta - \gamma$. The total
+    over many places grows at the mean rate, the top eigenvalue of the switching generator plus the diagonal of
+    growth rates:</p>
+    $$r_{\text{mean}} = \bar\beta - \gamma - \nu + \sqrt{\nu^2 + \delta^2} \;\approx\; \bar\beta - \gamma + K,
+      \qquad K = \frac{\delta^2}{2\nu},$$
+    <p>where $K$ is the Green&ndash;Kubo number of the transmission rate, the integral of its autocovariance. The
+    growth convexity is then $G = 1 + K/\bar\beta$.</p>
+    <p>A simulation of 4,000 independent places, each starting with an equal seed and with $\bar R = 1.5$, reads
+    these from the national total:</p>
+    <div class="table-wrap"><table class="impl"><thead><tr><th>$\delta$, $\nu$ (per day)</th><th>$R$ from national growth</th><th>textbook threshold $1 - 1/R$</th><th>infected at the national peak</th><th>final</th></tr></thead><tbody>
+    <tr><td>0 (no switching)</td><td>1.50</td><td>33%</td><td>34%</td><td>58%</td></tr>
+    <tr><td>0.1, 0.1</td><td>1.69</td><td>41%</td><td>27%</td><td>63%</td></tr>
+    <tr><td>0.2, 0.1</td><td>2.11</td><td>53%</td><td>20%</td><td>72%</td></tr>
+    <tr><td>0.2, 0.03</td><td>2.34</td><td>57%</td><td>13%</td><td>78%</td></tr>
+    <tr><td>0.25, 0.05</td><td>2.49</td><td>60%</td><td>10%</td><td>80%</td></tr>
+    </tbody></table></div>
+    <p class="muted">Recovery rate $\gamma = 0.2$ per day. National growth matched the eigenvalue, for example 0.221
+    per day simulated against 0.224 predicted.</p>
+    <p>Early growth reads $R$ between 1.7 and 2.5 while the average is 1.5. The national curve peaks with 10-27%
+    infected, long before the threshold that the growth implies, and infection continues afterwards.</p>
+    <p class="muted">Code: <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/01_communities.py">01_communities.py</a>.</p>
+  </main>
