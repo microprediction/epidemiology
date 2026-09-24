@@ -37,42 +37,36 @@ without fitting to epidemic outcomes. Winter 2020--21 US county waves imply 2.4-
 
 \section{Introduction}
 
-In 341 US county epidemic waves of winter 2020--21, the median wave reached its peak of incidence when estimated
-cumulative infections were 16\% of the population. Under a homogeneous model, the growth at the start of those waves
-implies a median threshold of 30\%. Infections here are estimated from deaths at a fatality rate of 0.7\%, and growth
-is converted to a reproduction number with a generation interval of mean 5.5 days. We call the peak of incidence the
-\emph{turnover}.
+In 341 US county epidemic waves of winter 2020--21, the median wave reached its peak of incidence when an estimated
+16\% of the population had been infected. Under a homogeneous model, the growth at the start of those waves implies
+a threshold of 30\%. Infections are estimated from deaths at a fatality rate of 0.7\%, and growth is converted to a
+reproduction number with a generation interval of mean 5.5 days. We call the peak of incidence the \emph{turnover}.
 
-In the spring of 2020 case counts doubled in under a week, which a homogeneous model reads as a reproduction number
-near 2.5 and a threshold of 60\%. \citet{cotton2020fundamental,cotton2020herd} called the gap between such thresholds
-and the observed peaks the herd-immunity paradox and argued that it follows from variation in transmission across people,
-places and time: early growth is dominated by the fastest transmitters, and the turnover by a harmonic mean
-\citep{cotton2020herd}.
+The gap is the herd-immunity paradox of \citet{cotton2020fundamental,cotton2020herd}. In the spring of 2020 case
+counts doubled in under a week, which a homogeneous model reads as a reproduction number near 2.5 and a threshold of
+60\%, yet the first waves peaked long before. Those papers traced the gap to variation in transmission across
+people, places and time: early growth is dominated by the fastest transmitters, and the turnover is set by a harmonic
+mean.
 
-People with many contacts are infected sooner, and while infectious they generate more exposure, so each infection
-removes more than its share of future transmission. \citet{britton2020} and \citet{gomes2022} made this quantitative
-for persistent differences in activity or susceptibility. \citet{tkachenko2021} added activity that changes over time,
-named the immunity factor, and showed that the resulting suppression is partly transient; \citet{tkachenko2021elife}
-modelled each person's activity as a mean-reverting process.
+The mechanism is simple. People with many contacts are infected sooner, and while infectious they generate more
+exposure, so each infection removes more than its share of future transmission. \citet{britton2020} and
+\citet{gomes2022} quantified this for persistent differences in activity or susceptibility. \citet{tkachenko2021}
+allowed activity to change over time and showed that part of the suppression is transient. They also named the
+number that summarizes the effect, the \emph{immunity factor} $\lambda$: the effective reproduction number falls as
+$R\,S^{\lambda}$ in the susceptible share $S$, and the turnover comes at about $1 - R^{-1/\lambda}$.
 
-The effect is summarized by the \emph{immunity factor} $\lambda$, the rate at which the effective reproduction number
-falls relative to the susceptible share. We estimate it in two ways that share no data. The first uses repeated
-contact surveys and a model of persistent and changing activity, without fitting to epidemic outcomes. The second
-backs a value out of the peaks of US county waves under an assumed fatality rate. The two ranges overlap, and both
-depend on their assumptions: the contact cap on one side, the fatality rate and the growth proxy on the other.
+We estimate $\lambda$ in two ways that share no data. The first uses repeated contact surveys and a model of
+persistent and changing activity, and never looks at an epidemic. The second backs $\lambda$ out of the peaks of the
+county waves under an assumed fatality rate. The two ranges overlap, and each depends on a choice: how very high
+contact counts are capped on the survey side, the fatality rate and the growth proxy on the epidemic side.
 \citet{gomes2022} obtain an independent value near 3.5 by fitting heterogeneous connectivity to deaths in England and
-Scotland.
-
-Where contacts were cut by lockdowns or voluntary distancing, peaks came with 1--5\% infected. The value of $\lambda$
-implied by such a peak absorbs the drop in contacts and does not measure immunity.
+Scotland. Where contacts were cut by lockdowns or voluntary distancing, peaks came with 1--5\% infected, and the
+$\lambda$ implied by such a peak measures the cut in contacts rather than immunity.
 
 \section{The turnover rule}
 
-\paragraph{Unequal activity.} The immunity factor and the relations \eqref{eq:power}--\eqref{eq:rule} below are due
-to \citet[eqs.~9, 14, 15]{tkachenko2021}. Let $S$ be the susceptible share. In a homogeneous population the effective reproduction
-number is $R_e = R\,S$. For fixed gamma-distributed activity the power law below is exact, as shown next. In other
-models we define $\lambda$ by the initial fall of $R_e$ and use the power law as an approximation to predict the
-turnover. When people differ in activity, write
+\paragraph{Definition.} In a homogeneous population the effective reproduction number is $R_e = R\,S$, with $S$ the
+susceptible share. When people differ in activity, write
 \begin{equation}\label{eq:power}
   R_e = R\,S^{\lambda}.
 \end{equation}
@@ -82,10 +76,12 @@ percentage points of $R$. Setting $R_e = 1$ gives the infected share at the turn
   a^\star = 1 - R^{-1/\lambda}.
 \end{equation}
 The textbook threshold is the case $\lambda = 1$. Equivalently, the textbook formula applies with the adjusted
-reproduction number $R^{1/\lambda}$.
+reproduction number $R^{1/\lambda}$. The factor and both relations are due to \citet[eqs.~9, 14, 15]{tkachenko2021}.
 
-Here $R$ is the initial effective reproduction number of the model. When $R$ is inferred from growth it also depends
-on the assumed generation interval, and in a model with changing activity the two need not coincide.
+\paragraph{Scope.} For fixed gamma-distributed activity, \eqref{eq:power} is exact, as shown next. In other models we
+define $\lambda$ by the initial fall of $R_e$ and use \eqref{eq:power} as an approximation to predict the turnover.
+Throughout, $R$ is the initial effective reproduction number of the model. When $R$ is inferred from growth it also
+depends on the assumed generation interval, and in a model with changing activity the two need not coincide.
 
 \paragraph{Gamma activity.} Let activity $a$ have a gamma distribution with mean one and squared coefficient of
 variation $\CV^2 = 1/k$, and let it scale both the chance of infection and the number of people infected. After
@@ -94,8 +90,8 @@ e^{-aZ}] \propto (1 + Z/k)^{-k-2}$. Hence \eqref{eq:power} holds exactly with
 \begin{equation}\label{eq:gamma}
   \lambda = 1 + 2\,\CV^2 ,
 \end{equation}
-as in \citet[eqs.~21--22]{gomes2022}, who give $1 + \CV^2$ when only susceptibility varies, and
-\citet[eq.~14]{tkachenko2021}.
+as in \citet[eqs.~21--22]{gomes2022} and \citet[eq.~14]{tkachenko2021}. When only susceptibility varies the exponent
+is $1 + \CV^2$.
 
 \paragraph{Age structure.} Let $M_{ij}$ be the mean number of daily contacts of a person in age group $i$ with people
 in group $j$, and $n_i$ the population shares. Infected fractions grow along the leading right eigenvector $v$ of $M$;
@@ -104,18 +100,20 @@ let $u$ be the left eigenvector. Depleting susceptibles along $v$ lowers the lea
   \lambda_{\text{age}} = \frac{\sum_i u_i v_i^2 \big/ \sum_i u_i v_i}{\sum_i n_i v_i}.
 \end{equation}
 The numerator measures how strongly early infections sit in the groups that drive transmission; the denominator
-converts to the overall infected share. The same formula applies to any finite type structure, and we use it for age
-crossed with activity.
+converts to the overall infected share. The same formula applies to any finite type structure, and we use it below
+for age crossed with activity.
 
-\paragraph{Accuracy of the rule.} Equation \eqref{eq:lamage} is a first-order slope, so \eqref{eq:rule} is an
-approximation away from the gamma case. In the joint age and activity models of Section~\ref{sec:contacts}, solved
-numerically to the peak, the rule understates the infected share at the turnover by 0.6 to 1.2 percentage points at
-$R = 1.3$, 1.4 to 2.9 points at $R = 1.6$, and 3.6 to 7.0 points at $R = 2.5$.
+\paragraph{Accuracy.} Equation \eqref{eq:lamage} is a first-order slope, so \eqref{eq:rule} is an approximation away
+from the gamma case. In the joint age and activity models of Section~\ref{sec:contacts}, solved numerically to the
+peak, the rule understates the infected share at the turnover by 0.6 to 1.2 percentage points at $R = 1.3$, 1.4 to
+2.9 points at $R = 1.6$, and 3.6 to 7.0 points at $R = 2.5$.
 
 \section{Activity that changes over time}\label{sec:switching}
 
-\paragraph{A solvable model.} \citet{tkachenko2021elife} let each person's activity follow a mean-reverting
-square-root process with a correlation time. A two-state version has closed forms. Let each person's activity take two values with long-run shares $p_1, p_2$, mean one and
+Activity is not fixed. \citet{tkachenko2021elife} let each person's activity follow a mean-reverting square-root
+process with a correlation time. A two-state version has closed forms.
+
+\paragraph{The model.} Let each person's activity take two values with long-run shares $p_1, p_2$, mean one and
 variance $\sigma^2$, so that $(a - 1)^2 = c\,(a - 1) + \sigma^2$ for a constant $c$ that sets the skew. Activity
 switches on a Markov clock with generator $Q$ and relaxes at rate $\kappa$. A person with activity $a$ is infected at
 rate $\beta\,a\,\Phi$, where $\Phi = \sum_k a_k I_k$, and infectious people recover at rate $\gamma$.
@@ -133,10 +131,10 @@ During growth, with $\rho = r/(r + \kappa)$, the immunity factor is
 \end{proposition}
 
 The proof is in Appendix~\ref{app:proof}. The resolvent $(r + \gamma - Q^\top)^{-1}$ acts on only two directions,
-the stationary law $p$ and the deviation $(a - 1)\circ p$, which decays at rate $\kappa$. People with more contacts
-are infected sooner and, while infectious, generate more exposure. The second term in \eqref{eq:growth} is the
-persistence of an individual's activity over the infectious period: it contributes while a busy phase outlasts the
-infection.
+the stationary law $p$ and the deviation $(a - 1)\circ p$, which decays at rate $\kappa$. The second term in
+\eqref{eq:growth} is the persistence of an individual's activity over the infectious period: people with more
+contacts are infected sooner and, while infectious, generate more exposure, and the term contributes while a busy
+phase outlasts the infection.
 
 \paragraph{Limits.} With $\kappa = 0$, \eqref{eq:lamswitch} is $\langle a^3\rangle/\langle a^2\rangle$, the value for
 persistent heterogeneity \citep[eqs.~12, 18]{tkachenko2021}. As $\kappa \to \infty$ it tends to one. For fast switching,
@@ -156,34 +154,42 @@ one growth time. This interpolates between the limits of Proposition~\ref{prop:s
 
 \section{Mixtures of places}
 
-\citet{cotton2020herd} reaches the same conclusion from a population made of many places. To isolate the effect of
-heterogeneous local rates, consider independent places with equally seeded epidemics, each with transmission rate
-$\beta = \bar\beta\,\eta$ where $\eta$ has mean one across places. Early growth of the total reads a transmission
-rate $\beta_g = t^{-1}\log\mathbb{E}\,e^{t\bar\beta\eta} = G\,\bar\beta$ with $G > 1$. The susceptible share at the
-turnover, averaged over places, is \citep[\S\S3.1--3.2]{cotton2020herd} $\mathbb{E}[\gamma/\beta] = J/\bar R$ with $J = \mathbb{E}[1/\eta] \ge 1$. Together,
+Variation across places gives the same rule as variation across people. \citet{cotton2020herd} considers a
+population made of many places. To isolate the effect of heterogeneous local rates, take the places to be independent,
+with equally seeded epidemics and transmission rates $\beta = \bar\beta\,\eta$, where $\eta$ has mean one across
+places.
+
+Early growth of the total reads a transmission rate $\beta_g = t^{-1}\log\mathbb{E}\,e^{t\bar\beta\eta} = G\,\bar\beta$
+with $G > 1$, because the fastest places dominate the sum. The susceptible share at the turnover, averaged over
+places, is $\mathbb{E}[\gamma/\beta] = J/\bar R$ with $J = \mathbb{E}[1/\eta] \ge 1$ \citep[\S\S3.1--3.2]{cotton2020herd}.
+Together,
 \begin{equation}
   s^\star \approx \frac{J\,G}{R_g},
 \end{equation}
-larger than the textbook $1/R_g$ by two convexity adjustments. In \citet{cotton2020herd} the rate follows an
-Ornstein--Uhlenbeck process, its growth convexity is Vasicek's bond-price formula, and the long-run growth excess is
-the variance times the correlation time \citep[eq.~16]{cotton2020herd}. The same holds for a two-state switch. When
-each place's rate switches between $\bar\beta \pm
-\delta$ at rate $\nu$, the total grows at the top eigenvalue $\bar\beta - \gamma - \nu + \sqrt{\nu^2 + \delta^2}$, which
-is $\bar\beta - \gamma + \delta^2/(2\nu)$ to first order: the growth convexity is again a Green--Kubo number.
+larger than the textbook $1/R_g$ by two convexity adjustments, one on growth and one on the turnover.
+
+In \citet{cotton2020herd} the rate follows an Ornstein--Uhlenbeck process, the growth convexity is Vasicek's
+bond-price formula, and the long-run growth excess is the variance times the correlation time
+\citep[eq.~16]{cotton2020herd}. A two-state switch behaves the same way. When each place's rate switches between
+$\bar\beta \pm \delta$ at rate $\nu$, the total grows at the top eigenvalue $\bar\beta - \gamma - \nu + \sqrt{\nu^2 +
+\delta^2}$, which is $\bar\beta - \gamma + \delta^2/(2\nu)$ to first order. The growth convexity is again a
+Green--Kubo number.
 
 \section{The immunity factor from contact surveys}\label{sec:contacts}
 
 \paragraph{One-day diaries.} The POLYMOD diaries \citep{mossong2008} record the contacts of 7,290 people in eight
 European countries on one day. Diary space limited entries to 29 contacts (30 in the United Kingdom), and in four
 countries respondents estimated their professional contacts rather than listing them. We count listed contacts, which
-understates the upper tail. Within age groups the squared coefficient of variation of the number of contacts is
-0.53 for ages 0--19, 0.63 for 20--64 and 0.77 for 65 and over. Combining these with the age matrices of
-\citet{prem2021} through \eqref{eq:lamage}, with activity held fixed, gives $\lambda = 2.70$ for the United States,
-2.77 for Sweden, 2.66 for Spain, 3.02 for the United Kingdom and 2.30 for Brazil. Age alone gives 1.3--1.7.
+understates the upper tail.
+
+Within age groups the squared coefficient of variation of the number of contacts is 0.53 for ages 0--19, 0.63 for
+20--64 and 0.77 for 65 and over. Combining these with the age matrices of \citet{prem2021} through \eqref{eq:lamage},
+with activity held fixed, gives $\lambda = 2.70$ for the United States, 2.77 for Sweden, 2.66 for Spain, 3.02 for the
+United Kingdom and 2.30 for Brazil. Age alone gives 1.3--1.7.
 
 A one-day diary cannot tell a busy person from a busy day, so these values mix lasting and passing variation.
-\citet{gomes2022} estimate the coefficient of variation from POLYMOD and nineteen other surveys, make the same
-point, and use two-day diaries to separate the two.
+\citet{gomes2022}, who estimate the coefficient of variation from POLYMOD and nineteen other surveys, make the same
+point and use two-day diaries to separate the two. Repeated surveys separate them further.
 
 \paragraph{Repeated surveys.} The CoMix survey \citep{jarvis2020,gimma2022,gimmadata2024} ran in the United Kingdom
 from March 2020 to March 2022. Each participant reported their contacts up to eight or ten times, two weeks apart. We
@@ -191,13 +197,16 @@ use 21,158 adults aged 18--69 seen at least three times, 160,869 survey days in 
 observed over 123 days and 90\% within 267 days; about 4\% rejoin after a gap of around seven months.
 
 Activity is the number of contacts on the diary day divided by the mean for the same week and age group. This removes
-the common effect of lockdowns and seasons on each age group, though not effects that differ between people. The
-covariance of a person's activity between surveys $\ell$ days apart is fitted as
+the common effect of lockdowns and seasons on each age group, though not effects that differ between people. Very
+high counts are capped; the CoMix team caps at 50 contacts a day, the value they found to track changes in the
+reproduction number most closely \citep{gimma2022}, and we also report caps of 20 and 100.
+
+The covariance of a person's activity between surveys $\ell$ days apart is fitted as
 \begin{equation}
   C(\ell) = \sigma_p^2 + \sigma_s^2\,e^{-\ell/\tau} \quad (\ell \ge 7), \qquad C(0) = \sigma_p^2 + \sigma_s^2 + \sigma_n^2 ,
 \end{equation}
 with a persistent part, a switching part of correlation time $\tau$, and a residual $\sigma_n^2$ that repeat
-observations at lags of a week or more cannot resolve.
+observations at lags of a week or more cannot resolve. Table~\ref{tab:comix} gives the fit.
 
 \begin{table}[h]
 \centering
@@ -210,16 +219,17 @@ contacts capped at & one-day $\CV^2$ & persistent $\sigma_p^2$ & switching $\sig
 100 & 6.54 & 1.69 (26\%) & 0.88 (14\%) & 23 & 3.97 (61\%) \\
 \bottomrule
 \end{tabular}
-\caption{Decomposition of adult activity in the CoMix UK panel.}\label{tab:comix}
+\caption{Decomposition of adult activity in the CoMix UK survey.}\label{tab:comix}
 \end{table}
 
 Under this covariance model, 26--30\% of the variance of capped daily contacts is persistent and 13--14\% belongs to a
-component with a correlation time of 23 to 36 days. The remaining 57--61\% is unresolved by repeat observations at lags
-of a week or more. It includes day-to-day variation, and it may also include genuine correlations lasting less than a
-week, which could matter over an infectious period. The shares are similar under the three caps, but the levels are
-not. The fitted covariance is flat from one month to the longest lags, so the persistent component behaves like a
-habit over the months each person is observed. Restricting the fit to lags of at most 200 days changes each share by
-at most one percentage point.
+component with a correlation time of 23 to 36 days. The remaining 57--61\% is unresolved by repeat observations at
+lags of a week or more. It includes day-to-day variation, and it may also include genuine correlations lasting less
+than a week, which could matter over an infectious period.
+
+The shares are similar under the three caps; the levels are not. The fitted covariance is flat from one month to the
+longest lags, so the persistent component behaves like a habit over the months each person is observed. Restricting
+the fit to lags of at most 200 days changes each share by at most one percentage point.
 
 \paragraph{Prediction.} Inserting \eqref{eq:cveff} into the joint age and activity structure with the UK matrix gives
 the immunity factors in Table~\ref{tab:predict}, for growth rates from 0.02 to 0.2 per day. The residual is left
@@ -240,18 +250,16 @@ contacts capped at & $\lambda$ & turnover at $R = 1.6$ & turnover at $R = 2.5$ \
 \end{table}
 
 The immunity factor changes by only about 7\% across a tenfold range of growth rates, because the switching part is
-small. The level depends on how the few very high contact counts are treated: it rises from 3.4--3.7 at a cap of 20 to
-5.9--6.8 at 100. The CoMix team caps at 50 contacts a day, the value they found to track changes in the reproduction
-number most closely \citep{gimma2022}. How many of a very busy person's contacts can transmit is unresolved.
+small. The level depends on the cap, and how many of a very busy person's contacts can transmit is unresolved.
 
 \section{The immunity factor in epidemics}
 
 \paragraph{US county waves.} We identify 471 epidemic waves in 372 US counties of more than 50,000 people from daily
-deaths \citep{nyt2021}, February 2020 to June 2021. The data count deaths by the date
-they were reported, which adds noise to the timing of death peaks. For each wave, early growth $r$ gives $R$ through
-the relation $R = 1/M(-r)$ of \citet{wallinga2007}, with $M$ the moment generating function of an assumed gamma
-generation interval of mean 5.5 days and standard deviation 2.1 days. Cumulative deaths divided by an
-infection fatality rate give the infected share when the wave began, $a_0$, and at the death peak, $a_1$.
+deaths \citep{nyt2021}, February 2020 to June 2021. The data count deaths by the date they were reported, which adds
+noise to the timing of death peaks. For each wave, early growth $r$ gives $R$ through the relation $R = 1/M(-r)$ of
+\citet{wallinga2007}, with $M$ the moment generating function of an assumed gamma generation interval of mean 5.5
+days and standard deviation 2.1 days. Cumulative deaths divided by an infection fatality rate give the infected share
+when the wave began, $a_0$, and at the death peak, $a_1$.
 
 Suppose contacts stayed at their early-wave level. Then the wave's growth and its infected share at the peak imply,
 through \eqref{eq:rule}, the value
@@ -270,8 +278,8 @@ with 341 waves and growth estimated from deaths, a constant $\hat\lambda$ fits a
 their susceptibles whatever their $R$. Growth read from deaths and from cases three weeks earlier correlate at only
 0.23 in winter, and noise in a regressor flattens any fitted slope. With case growth as an instrument the slope of
 log depletion on $\log\ln R$ is 0.91 in spring (90\% interval 0.46 to 1.50) and 2.9 in winter (0.7 to 12.5). The
-county data identify the level of $\hat\lambda$ but not its dependence on growth, which Table~\ref{tab:predict} says is
-small.
+county data identify the level of $\hat\lambda$ but not its dependence on growth, which Table~\ref{tab:predict} says
+is small.
 
 \paragraph{Serology.} Antibody surveys measure the infected share directly. Scaling each survey back to the death peak
 with cumulative deaths gives the infected share at the turnover and the implied peak index in Table~\ref{tab:sero}.
@@ -303,22 +311,19 @@ immunity.
 
 \section{Discussion}
 
-Contact surveys predict an immunity factor of 4.6--5.2 at the survey's own cap of 50 contacts a day, 3.4--3.7 at a cap
-of 20 and 5.9--6.8 at 100. Winter county waves imply a peak index of 2.4--5.3 over fatality rates from 0.5\% to 1\%,
-3.5 at 0.7\%, and about 2.1 with growth from cases. \citet{gomes2022} fit about 3.5 to England and Scotland. The
-ranges overlap. At $R = 2.5$, $\lambda = 3.5$ puts the turnover near 23\% and $\lambda = 5$ near 17\%.
+The two estimates overlap. Contact surveys predict an immunity factor of 4.6--5.2 at the survey's own cap of 50
+contacts a day, 3.4--3.7 at 20 and 5.9--6.8 at 100. Winter county waves imply a peak index of 2.4--5.3 over fatality
+rates from 0.5\% to 1\%, and \citet{gomes2022} fit about 3.5 to England and Scotland. At $R = 2.5$, $\lambda = 3.5$
+puts the turnover near 23\% and $\lambda = 5$ near 17\%.
 
-On the contact side the level depends on how very high contact counts are treated and on the residual below one week.
-On the epidemic side it scales with the assumed fatality rate and the growth proxy. The two sets of uncertainties are
-of similar size.
+Each side carries an uncertainty of similar size. On the survey side the level depends on the cap and on the residual
+below one week. On the epidemic side it scales with the assumed fatality rate and the growth proxy.
 
 In the CoMix data most of the resolved heterogeneity persists over the months each person is observed. The switching
 part is smaller and decorrelates over about a month, so in this model a first-wave turnover is mostly a lasting
-reduction of the threshold with a transient on top.
-
-\citet{tkachenko2021} reach a different balance. They put the long-run immunity factor near 2 and conclude that most of
-the first-wave suppression was transient. A survey that follows the same people for years would settle how long the
-persistent component lasts.
+reduction of the threshold with a transient on top. \citet{tkachenko2021} reach a different balance: they put the
+long-run immunity factor near 2 and conclude that most of the first-wave suppression was transient. A survey that
+follows the same people for years would settle how long the persistent component lasts.
 
 The reported later attack in Manaus, 66--76\%, is difficult to reconcile with a fixed-activity model of this size.
 Changing activity is one possible explanation. The contact distribution in Manaus and the blood-donor estimates are
