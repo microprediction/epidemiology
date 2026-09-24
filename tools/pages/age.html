@@ -1,7 +1,7 @@
 <!-- title: Age and contact matrices · epidemiology | math -->
   <main>
     <h1>Age and contact matrices</h1>
-    <p class="subtitle">Measured contact patterns give the immunity factor with nothing fitted: 1.1-1.7 from age alone, 2.3-3.0 with one-day contact diaries, and 3.4-3.7 from a panel that follows the same people for two years.</p>
+    <p class="subtitle">Measured contact patterns predict the immunity factor without fitting to epidemic outcomes: 1.1-1.7 from age alone, 2.3-3.0 with one-day contact diaries, and 3.4-6.8 from a panel that follows the same people for two years, depending on how very high contact counts are capped.</p>
 
     <h2>Age alone</h2>
     <p>Let $M_{ij}$ be the average number of daily contacts a person of age group $i$ has with people of age group
@@ -60,15 +60,18 @@
     <p>A one-day diary mixes lasting differences between people with day-to-day variation, so the fixed-activity
     value is an upper bound for the lasting part. POLYMOD also under-records very high contact counts in some
     countries, which pushes the other way.</p>
-    <p>With activity held fixed, the final size in Brazil at $R = 1.6$ would be 35%. Manaus reached 66-76%. The early
-    turnover matches fixed activity, but the final size says activity reshuffled afterwards
-    (<a href="./switching.html">activity that changes over time</a>).</p>
+    <p>With activity held fixed, the final size in Brazil at $R = 1.6$ would be 35%. The reported attack in Manaus,
+    66-76%, is difficult to reconcile with this fixed-activity example. Changing activity is one possible explanation
+    (<a href="./switching.html">activity that changes over time</a>); the contact distribution in Manaus and the
+    blood-donor estimates are additional uncertainties.</p>
 
     <h2 id="comix">How long busy phases last</h2>
-    <p>A one-day diary cannot tell a busy person from a busy day. The CoMix panel
+    <p>A one-day diary cannot tell a busy person from a busy day.</p>
+    <p>The CoMix panel
     (<a href="./bibliography.html#CoMixUK">CoMix UK</a>) surveyed the same people repeatedly from March 2020 to March
     2022. For 21,158 adults seen at least three times, activity is the number of contacts on the diary day divided by
-    the mean for the same week and age group, so lockdowns and seasons drop out.</p>
+    the mean for the same week and age group. That removes the common effect of lockdowns and seasons on each age
+    group, though not effects that differ between people.</p>
     <p>The covariance of a person's activity between surveys separated by $\ell$ days is fitted as</p>
     $$C(\ell) = \sigma_p^2 + \sigma_s^2\,e^{-\ell/\tau} \quad (\ell \ge 7\ \text{days}), \qquad
       C(0) = \sigma_p^2 + \sigma_s^2 + \sigma_n^2 ,$$
@@ -79,11 +82,15 @@
     <tr><td>50</td><td>3.90</td><td>1.06 (27%)</td><td>0.51 (13%)</td><td>28 days</td><td>2.34 (60%)</td></tr>
     <tr><td>100</td><td>6.54</td><td>1.69 (26%)</td><td>0.88 (14%)</td><td>23 days</td><td>3.97 (61%)</td></tr>
     </tbody></table></div>
-    <p>The split is stable: about 60% of the variation between one day and the next is gone within a week and does
-    not affect which people an epidemic uses up. About 27-30% lasts for the whole two years. About 13% comes and goes
-    with a correlation time of three to five weeks.</p>
+    <p>Under this covariance model, 26-30% of the variance of capped daily contacts is persistent and 13-14% belongs to
+    a component with a correlation time of 23 to 36 days.</p>
+    <p>The remaining 57-61% is unresolved by repeat observations a
+    week or more apart. It includes day-to-day variation, and it may also include genuine correlations lasting less
+    than a week, which could matter over an infectious period. The shares are similar under the three caps; the
+    levels are not.</p>
     <p>During a wave growing at rate $r$, the persistent part acts in full and the switching part in proportion
-    $r/(r + 1/\tau)$. With the UK age matrix, the predicted immunity factor is</p>
+    $r/(r + 1/\tau)$; the unresolved residual is left out. With the UK age matrix, the predicted immunity factor,
+    without fitting to epidemic outcomes, is</p>
     <div class="table-wrap"><table class="impl"><thead><tr><th>contacts capped at</th><th>$\lambda$, growth 0.02-0.2 per day</th><th>turnover at $R = 1.6$</th><th>turnover at $R = 2.5$</th></tr></thead><tbody>
     <tr><td>20</td><td>3.4-3.7</td><td>12-13%</td><td>22-24%</td></tr>
     <tr><td>50</td><td>4.6-5.2</td><td>9-10%</td><td>16-18%</td></tr>
@@ -91,14 +98,17 @@
     </tbody></table></div>
     <p class="muted">Code: <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/17_comix.py">17_comix.py</a>,
     <a href="https://github.com/microprediction/epidemiology/blob/main/research/epidemic-hit/analysis/18_comix_lambda.py">18_comix_lambda.py</a>.</p>
-    <p>With no epidemic data used, the capped-at-20 row gives 3.4-3.7, which matches the US county waves of winter
-    2020-21 and the value of about 4 fitted to New York City. At $R = 2.5$ it puts the turnover at 22-24%, the
-    herd-immunity paradox as first observed.</p>
+    <p>The level depends on the cap: 3.4-3.7 at 20, 4.6-5.2 at 50 and 5.9-6.8 at 100. The cap of 20 limits the
+    influence of a few reports of very large groups; that choice is not derived from transmission data.</p>
+    <p>At that cap
+    the prediction is close to the index implied by US county waves of winter 2020-21 at a 0.7% fatality rate (3.5)
+    and to the value of about 4 that Tkachenko et al. fitted to New York City. At $R = 2.5$ it puts the peak at
+    22-24%.</p>
     <p>The immunity factor changes by only about 7% across a tenfold range of growth rates. That is why the county
     data could not measure how the turnover varies with growth.</p>
-    <p>The transient part is small and wears off over about a month. The persistent part is two to three times
-    larger and does not wear off, which fits a lasting reduction in the threshold better than it fits Manaus'
-    66-76% final attack.</p>
+    <p>In this model the transient part is small and decorrelates over about a month, and the persistent part is two
+    to three times larger. That describes a mostly lasting reduction in the threshold, which is difficult to
+    reconcile with the attack reported for Manaus.</p>
     <p>CoMix was collected during the pandemic, when contacts were fewer and more unequal than usual, and contact
     counts are an imperfect proxy for transmission.</p>
   </main>

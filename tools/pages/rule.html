@@ -1,7 +1,7 @@
 <!-- title: The turnover rule · epidemiology | math -->
   <main>
     <h1>The turnover rule</h1>
-    <p class="subtitle">An epidemic turns over when the infected share reaches $1 - R^{-1/\lambda}$, where $\lambda$ is the immunity factor. The textbook threshold is the case $\lambda = 1$.</p>
+    <p class="subtitle">The peak of incidence comes when the infected share reaches about $1 - R^{-1/\lambda}$, where $\lambda$ is the immunity factor: exactly for fixed gamma-distributed activity, and as an approximation from the initial slope in other models.</p>
 
     <h2>The textbook threshold</h2>
     <p>In a homogeneous population each infected person infects $R$ others at the start. When a fraction $S$ of the
@@ -16,7 +16,9 @@
     <p>People differ in how many others they meet. The busiest are infected first, and they are also the ones who
     would have passed the infection on most. Each infection therefore removes more than its share of future
     transmission, and $R_e$ falls faster than $S$.</p>
-    <p>The immunity factor $\lambda$ measures how much faster:</p>
+    <p>For fixed gamma-distributed activity the power law below is exact, as shown further down. In other models
+    $\lambda$ is defined by the initial fall of $R_e$, and the power law is used as an approximation to predict the
+    peak. The immunity factor $\lambda$ measures how much faster $R_e$ falls:</p>
     $$R_e = R\,S^{\lambda} .$$
     <p>Early on, when few are infected, this is</p>
     $$R_e \approx R\,\big(1 - \lambda\,(1 - S)\big),$$
@@ -30,6 +32,14 @@
     </div>
     <p>Equivalently, the textbook formula applies with an adjusted reproduction number $R^{1/\lambda}$ in place of
     $R$.</p>
+    <p>Here $R$ is the reproduction number at the start of the wave. When it is read from growth it also depends on
+    the assumed generation interval, and in a model where activity changes the two need not coincide.</p>
+
+    <h2>Accuracy</h2>
+    <p>Away from the gamma case the rule extrapolates an initial slope to a finite attack rate. In the joint age and
+    activity models on <a href="./age.html#activity">age and contact matrices</a>, solved numerically to the peak, the
+    rule understates the infected share at the peak by 0.6-1.2 percentage points at $R = 1.3$, 1.4-2.9 points at
+    $R = 1.6$, and 3.6-7.0 points at $R = 2.5$.</p>
 
     <h2>The table</h2>
     <p>Infected share at the turnover:</p>
@@ -43,8 +53,9 @@
     <p>Doubling in under a week ($R \approx 2.5$) with a turnover near 20-23% corresponds to $\lambda \approx 3.5$,
     and the adjusted reproduction number is then $2.5^{1/3.5} = 1.3$.</p>
     <p>The column $\lambda = 2.7$ is the value that one-day contact diaries give for the United States, Sweden and
-    Spain with nothing fitted (<a href="./age.html#activity">age and activity</a>). A two-year contact panel gives
-    3.4-3.7 (<a href="./age.html#comix">how long busy phases last</a>).</p>
+    Spain without fitting to epidemic outcomes (<a href="./age.html#activity">age and activity</a>). A two-year
+    contact panel gives 3.4-3.7 with daily contacts capped at 20 and 4.6-6.8 at caps of 50 and 100
+    (<a href="./age.html#comix">how long busy phases last</a>).</p>
 
     <h2>Against the US county waves</h2>
     <p>In winter 2020-21, 326 US county waves, grouped by their growth rate, turned over having infected these

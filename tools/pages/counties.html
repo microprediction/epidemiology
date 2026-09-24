@@ -1,7 +1,7 @@
 <!-- title: US county waves · epidemiology | math -->
   <main>
     <h1>US county waves</h1>
-    <p class="subtitle">471 county epidemic waves from 2020 to mid-2021: nearly all turned over far below the textbook threshold, with an immunity factor of 2 to 3.5 in winter 2020-21.</p>
+    <p class="subtitle">471 county epidemic waves from 2020 to mid-2021: nearly all peaked far below the threshold implied by their early growth, with an implied peak index of 2.4-5.3 in winter 2020-21 depending on the assumed fatality rate.</p>
 
     <h2>The data</h2>
     <p>Daily COVID-19 deaths by county from the New York Times, February 2020 to June 2021, with New York City as one
@@ -21,8 +21,11 @@
         peak marks the infection peak.</li>
     </ul>
     <p>A wave that starts with a susceptible share $S_0$ and effective reproduction number $R$ should, in a
-    homogeneous population, turn over at $S_0/R$. The immunity factor of the wave is</p>
-    $$\lambda = \frac{\ln R}{-\ln\big(S_{\text{turn}}/S_0\big)} .$$
+    homogeneous population, turn over at $S_0/R$. If contacts stayed at their early-wave level, the wave's growth and
+    its infected share at the peak would imply, through <a href="./rule.html">the turnover rule</a>, the value</p>
+    $$\hat\lambda = \frac{\ln R}{-\ln\big(S_{\text{turn}}/S_0\big)} ,$$
+    <p>the <em>implied peak index</em>. It equals the immunity factor only if contacts did not change during the wave.
+    When contacts fell, it absorbs the fall and does not measure immune selection.</p>
 
     <h2>The level</h2>
     <p>At a fatality rate of 0.7%, 95-100% of waves in every season turned over below the homogeneous threshold.</p>
@@ -31,9 +34,9 @@
     <tr><td>summer 2020</td><td>69</td><td>1.37</td><td>29%</td><td>6%</td></tr>
     <tr><td>winter 2020-21</td><td>341</td><td>1.29</td><td>30%</td><td>16% (cumulative)</td></tr>
     </tbody></table></div>
-    <p>Spring and summer 2020 carry the lockdowns and closures. In winter, the constant immunity factor that fits the
-    waves is about 3.5 at a 0.7% fatality rate, 2.4 at 0.5% and 5.3 at 1%, or about 2.1 at 0.7% when growth is read
-    from cases instead of deaths.</p>
+    <p>Spring and summer 2020 carry the lockdowns and closures. In winter, the constant implied peak index that fits
+    the waves is about 3.5 at a 0.7% fatality rate, 2.4 at 0.5% and 5.3 at 1%, or about 2.1 at 0.7% when growth is
+    read from cases instead of deaths.</p>
 
     <h2>The slope cannot be measured</h2>
     <p>Grouped by their growth, the winter waves infected nearly the same share of their susceptibles whatever their

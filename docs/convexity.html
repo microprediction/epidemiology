@@ -51,18 +51,15 @@
     <p class="subtitle">A population made of many places, each with its own transmission rate: early growth is dominated by the fastest places, each place turns over on its own, and two convexity adjustments separate the growth from the turnover.</p>
 
     <p class="lead">This is the argument of <a href="./papers.html">Cotton (2020)</a>, first set out in May 2020. It
-    needs no model of how the places interact.</p>
+    treats the places as evolving independently.</p>
 
-    <h2>Only symmetric questions matter</h2>
-    <p>Divide a city into neighbourhoods. The questions that matter for policy are symmetric in the neighbourhoods:
-    total infections, the growth of the total, the number still susceptible when infections peak. Relabelling the
-    neighbourhoods does not change them.</p>
-    <p>Any two models related by a relabelling give the same answers to these questions, so it is enough to find a
-    model in the same class as the true one. Each class contains exactly one exchangeable model.</p>
-    <p>By de Finetti's
-    theorem, exchangeable models are mixtures of models in which the neighbourhoods are independent and identically
-    distributed. That licenses the simplest model that can fit: independent neighbourhoods, each a standard SIR
-    epidemic with its own transmission rate.</p>
+    <h2>Independent places</h2>
+    <p>Divide a city into neighbourhoods. The quantities that matter for policy are totals: the number infected, the
+    growth of that number, and the number still susceptible when infections peak. Relabelling the neighbourhoods does
+    not change them.</p>
+    <p>To isolate the effect of heterogeneous local rates, the neighbourhoods are taken to be independent, each a
+    standard SIR epidemic with its own transmission rate and an equal seed. This is an assumption: real
+    neighbourhoods interact, and dependence between them can change the totals.</p>
 
     <h2>The model</h2>
     <p>Neighbourhood transmission rates are $\beta = \bar\beta\,\eta$, where $\eta$ varies across neighbourhoods with
